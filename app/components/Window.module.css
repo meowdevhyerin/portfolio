@@ -1,0 +1,769 @@
+.window {
+  position: fixed;
+  width: 600px;
+  max-width: 90vw;
+  background: rgba(40, 40, 40, 0.95);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  color: white;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.window.active {
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.window.light {
+  background: rgba(240, 240, 240, 0.95);
+  color: #333;
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.window.light.active {
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.header {
+  height: 40px;
+  background: rgba(50, 50, 50, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  cursor: default;
+  user-select: none;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.header.dragging {
+  cursor: grabbing;
+}
+
+.window.light .header {
+  background: rgba(220, 220, 220, 0.8);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+}
+
+.controls button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.7);
+  transition: opacity 0.15s ease;
+}
+
+.controls button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.close {
+  background: #ff5f56;
+}
+
+.close:hover:not(:disabled) {
+  background: #ff4136;
+}
+
+.minimize {
+  background: #ffbd2e;
+}
+
+.maximize {
+  background: #27c93f;
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 500;
+  flex: 1;
+  text-align: center;
+}
+
+.spacer {
+  width: 60px;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  max-height: 70vh;
+}
+
+/* macOS style scrollbar - Dark mode */
+.content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* macOS style scrollbar - Light mode */
+.window.light .content::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.window.light .content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.profileContent {
+  text-align: center;
+}
+
+.profileContent h1 {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.jobTitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 24px;
+}
+
+.bio {
+  text-align: left;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.bio p {
+  margin-bottom: 12px;
+}
+
+.folderGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 24px;
+  padding: 8px;
+}
+
+.folder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  cursor: default;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+  user-select: none;
+}
+
+.folder:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.folderIconContainer {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.folderIcon {
+  width: auto;
+  height: auto;
+  max-width: 68px;
+  max-height: 68px;
+  object-fit: contain;
+}
+
+.folderLabel {
+  font-size: 13px;
+  color: white;
+  text-align: center;
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.window.light .folderLabel {
+  color: #333;
+}
+
+.projectDetail {
+  padding: 8px;
+}
+
+.projectDetail h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.projectHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.projectHeader h2 {
+  margin: 0;
+}
+
+.projectActions {
+  display: flex;
+  gap: 8px;
+}
+
+.githubLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.githubLink:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.window.light .githubLink {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.15);
+  color: #333;
+}
+
+.window.light .githubLink:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+.githubIcon {
+  font-size: 16px;
+}
+
+.projectDescription {
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.window.light .projectDescription {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.window.light .jobTitle {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.window.light .bio {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.tags span {
+  padding: 4px 12px;
+  background: rgba(103, 126, 234, 0.4);
+  border: 1px solid rgba(103, 126, 234, 0.5);
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.techTag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.techIcon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  margin-left: -2px;
+}
+
+.achievements {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.window.light .achievements {
+  border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+.achievements h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.window.light .achievements h3 {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.achievementList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.achievementItem {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  padding-left: 16px;
+  position: relative;
+}
+
+.achievementItem::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: rgba(103, 126, 234, 0.9);
+  font-weight: bold;
+}
+
+.window.light .achievementItem {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.projectDetails {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.window.light .projectDetails {
+  border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+.projectDetails h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.window.light .projectDetails h3 {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.detailSection {
+  margin-bottom: 24px;
+}
+
+.detailSection h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: rgba(103, 126, 234, 0.9);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.detailSection p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+  margin-left: 4px;
+}
+
+.window.light .detailSection p {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 8px;
+}
+
+.galleryItem {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.galleryImageContainer {
+  width: 100%;
+  min-height: 150px;
+  max-height: 320px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  position: relative;
+}
+
+.galleryImageContainer:hover {
+  transform: scale(1.02);
+}
+
+.window.light .galleryImageContainer {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.galleryImage {
+  width: 100%;
+  height: auto;
+  max-height: 320px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.refreshOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.refreshIcon {
+  font-size: 48px;
+  color: rgba(255, 255, 255, 0.9);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.galleryCaption {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 0 8px;
+}
+
+.window.light .galleryCaption {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.resumeContent section {
+  margin-bottom: 32px;
+}
+
+.resumeContent h3 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.resumeItem {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.resumeItem h4 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.period {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 8px;
+}
+
+.skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+}
+
+.skills span {
+  padding: 8px 12px;
+  background: rgba(103, 126, 234, 0.3);
+  border: 1px solid rgba(103, 126, 234, 0.4);
+  border-radius: 6px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.settingsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.settingItem {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settingItem select {
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.window.light .settingItem select {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #333;
+}
+
+.settingItem input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.note {
+  margin-top: 16px;
+  padding: 12px;
+  background: rgba(255, 200, 0, 0.1);
+  border: 1px solid rgba(255, 200, 0, 0.3);
+  border-radius: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+}
+
+/* Project Images Thumbnail Grid */
+.projectImages {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.window.light .projectImages {
+  border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+.projectImages h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.window.light .projectImages h3 {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.imageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.imageItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.imageItem:hover {
+  transform: scale(1.05);
+}
+
+.thumbnailImage {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.window.light .thumbnailImage {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.imageCaption {
+  font-size: 11px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  padding: 0 4px;
+}
+
+.window.light .imageCaption {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* Image Viewer Carousel */
+.imageViewer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 650px;
+  padding: 20px 0;
+}
+
+.carouselButton {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  font-size: 24px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.carouselButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.window.light .carouselButton {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.15);
+  color: #333;
+}
+
+.window.light .carouselButton:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+.imageContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 850px;
+}
+
+.viewerImage {
+  width: 100%;
+  max-width: 750px;
+  max-height: 600px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.viewerCaption {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+}
+
+.window.light .viewerCaption {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.imageCounter {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+}
+
+.window.light .imageCounter {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+  .window {
+    width: 95vw;
+  }
+
+  .content {
+    padding: 16px;
+  }
+
+  .imageViewer {
+    min-height: 400px;
+  }
+
+  .viewerImage {
+    max-height: 350px;
+  }
+
+  .imageGrid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 12px;
+  }
+
+  .thumbnailImage {
+    height: 80px;
+  }
+}

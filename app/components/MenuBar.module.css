@@ -1,0 +1,56 @@
+.menuBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 28px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 1000;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.menuBar.light {
+  background: rgba(240, 240, 240, 0.85);
+  color: #333;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+
+.leftMenu,
+.rightMenu {
+  display: flex;
+  gap: 16px;
+}
+
+.menuItem {
+  cursor: default;
+  user-select: none;
+  padding: 2px 2px;
+  border-radius: 4px;
+  transition: background 0.15s ease;
+}
+
+.menuItem:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.batteryIcon {
+  font-size: 22px;
+  margin-right: 2px;
+  margin-top: 2px;
+}

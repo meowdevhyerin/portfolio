@@ -1,0 +1,28 @@
+.desktop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.wallpaper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/images/MojaveNight.jpg') center/cover;
+  z-index: 0;
+  transition: background 0.3s ease;
+}
+
+.desktop.light .wallpaper {
+  background: url('/images/MojaveDay.jpg') center/cover;
+}
+
+.shortcuts {
+  position: relative;
+  z-index: 1;
+}
