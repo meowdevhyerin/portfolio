@@ -11,6 +11,9 @@ const notoSansKR = Noto_Sans_KR({
 export const metadata: Metadata = {
   title: 'Hyerin Hong - Portfolio',
   description: 'Frontend Developer Portfolio',
+  icons: {
+    icon: '/images/favicon.ico',
+  },
   openGraph: {
     title: 'Hyerin Hong - Portfolio',
     description: 'Frontend Developer Portfolio',
