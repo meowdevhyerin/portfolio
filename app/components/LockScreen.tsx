@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { PiArrowCircleRightThin } from "react-icons/pi";
 import styles from "./LockScreen.module.css";
 
@@ -44,10 +45,14 @@ export default function LockScreen({ onUnlock, isUnlocking }: LockScreenProps) {
 
       <div className={styles.loginSection}>
         <div className={styles.profileCircle}>
-          <img
+          <Image
             src="/images/ProfileImage2.jpg"
             alt="Profile"
             className={styles.profileImg}
+            width={120}
+            height={120}
+            priority
+            quality={85}
           />
         </div>
         <div className={styles.userName}>홍혜린</div>

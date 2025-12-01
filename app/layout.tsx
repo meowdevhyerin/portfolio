@@ -46,6 +46,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko" className={notoSansKR.variable} suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://images.unsplash.com" />
+      </head>
       <body suppressHydrationWarning>{children}</body>
     </html>
   )

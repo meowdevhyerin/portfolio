@@ -1,13 +1,17 @@
+import Image from "next/image";
 import styles from "../Window.module.css";
 
 export default function ProfileContent() {
   return (
     <div className={styles.content}>
       <div className={styles.profileContent}>
-        <img
+        <Image
           src="/images/ProfileImage.png"
           alt="Profile"
           className={styles.profileImage}
+          width={150}
+          height={150}
+          quality={85}
         />
         <h1>홍혜린</h1>
         <p className={styles.jobTitle}>

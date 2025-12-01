@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
 import styles from "../Window.module.css";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import { IoMdRefresh } from "react-icons/io";
@@ -56,15 +55,18 @@ export default function ImageViewerContent({
       clearTimeout(timerRef.current);
     }
 
-    const currentSrc = images[currentIndex].src;
-    const duration = gifDurations[currentSrc];
+    // 이미지가 로딩 완료된 후에만 타이머 시작
+    if (!isLoading) {
+      const currentSrc = images[currentIndex].src;
+      const duration = gifDurations[currentSrc];
 
-    if (duration) {
-      timerRef.current = setTimeout(() => {
-        setShowRefreshIcon(true);
-      }, duration);
+      if (duration) {
+        timerRef.current = setTimeout(() => {
+          setShowRefreshIcon(true);
+        }, duration);
+      }
     }
-  }, [currentIndex, imageKey, images]);
+  }, [currentIndex, imageKey, images, isLoading]);
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
@@ -105,14 +107,11 @@ export default function ImageViewerContent({
                 <div className={styles.spinner}></div>
               </div>
             )}
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={`${images[currentIndex].src}?t=${imageKey}`}
               alt={images[currentIndex].caption}
               className={styles.viewerImage}
-              width={800}
-              height={600}
-              unoptimized
-              priority={currentIndex === initialIndex}
               onLoad={() => setIsLoading(false)}
               style={{
                 opacity: isLoading ? 0 : 1,
