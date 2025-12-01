@@ -109,7 +109,8 @@ export default function ImageViewerContent({
             )}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={`${images[currentIndex].src}?t=${imageKey}`}
+              key={imageKey}
+              src={images[currentIndex].src}
               alt={images[currentIndex].caption}
               className={styles.viewerImage}
               onLoad={() => setIsLoading(false)}
