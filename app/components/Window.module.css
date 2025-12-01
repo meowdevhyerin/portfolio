@@ -152,6 +152,14 @@
   text-align: center;
 }
 
+.profileImage {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border-radius: 12px;
+}
+
 .profileContent h1 {
   font-size: 36px;
   font-weight: 600;
