@@ -14,20 +14,61 @@ const techStackIcons: { [key: string]: string } = {
   "Tailwind Css": "/images/TackStackIcons/Tailwind.png",
   "React Router": "/images/TackStackIcons/ReactRouter.png",
   Vite: "/images/TackStackIcons/Vite.png",
+  "D3.js": "/images/TackStackIcons/D3.png",
+  ReactFlow: "/images/TackStackIcons/ReactFlow.png",
 };
 
 const projectData = {
   "project-loglens": {
     title: "LogLens",
-    description: "프로젝트 설명을 여기에 작성하세요.",
+    description:
+      "마이크로서비스 환경에서 발생하는 대규모 로그·트랜잭션 데이터를 실시간으로 분석·시각화하여 운영자가 빠르게 문제를 파악할 수 있도록 지원하는 모니터링 플랫폼",
+    githubUrl: "#",
+    images: [],
     tags: [
       "React",
       "TypeScript",
+      "Vite",
       "Zustand",
       "TanStack Query",
-      "Tailwind Css",
       "React Router",
-      "Vite",
+      "D3.js",
+      "ReactFlow",
+      "Tailwind Css",
+    ],
+    achievements: [
+      "실시간 스트리밍 처리 구축 | SSE 기반 로그·알림 스트림, 중복 제거·자동 재연결·토큰 인증 구조 설계",
+      "요청 흐름 & 의존성 시각화 | D3.js forceSimulation + ReactFlow 기반 트랜잭션·서비스 구조 시각화",
+      "AI 기반 분석 기능 | 스트리밍 LLM 응답 + PDF/Markdown 자동 문서화 기능 제작",
+      "운영 대시보드 설계 | 로그 추이, 에러 TOP10, 트래픽·히트맵 등 운영 관점 UI 구성",
+      "대량 데이터 처리 최적화 | 무한 스크롤, 캐싱·리패치 전략, D3 렌더링 최적화",
+    ],
+    details: [
+      {
+        title: "실시간 로그·알림 스트림 처리",
+        content:
+          "SSE(EventSource)를 사용해 서버의 로그·알림 데이터를 실시간으로 수신하는 구조를 설계했습니다. 중복 로그 필터링, 네트워크 단절 시 자동 재연결, 토큰 기반 인증 흐름, 에러 임계값 초과 시 즉각 알림 처리 등 실시간 데이터가 많은 운영 환경에서도 안정적으로 동작하도록 구성했습니다.",
+      },
+      {
+        title: "요청 흐름·의존성 시각화",
+        content:
+          "D3.js 기반의 트랜잭션 흐름 그래프를 구현했습니다. forceSimulation으로 노드 배치, BFS 기반 계층 레이아웃, 링크·입자 애니메이션으로 호출 흐름을 직관적으로 표현했습니다. 또한 ReactFlow 기반 의존성 그래프를 제작하여 Upstream/Downstream 구조, 호출량/에러량을 한눈에 파악할 수 있도록 했습니다.",
+      },
+      {
+        title: "AI 로그 분석 & 리포트 생성",
+        content:
+          "LLM 응답을 스트리밍 형태로 단계적으로 렌더링하며, React Markdown, 코드 하이라이팅, PDF 자동 변환(html2canvas + jsPDF)을 통해 분석 결과를 문서 형태로 바로 다운로드할 수 있게 구성했습니다. 운영자가 로그를 기반으로 빠르게 분석 결과를 공유할 수 있도록 지원하는 기능입니다.",
+      },
+      {
+        title: "운영자 중심 대시보드 구성",
+        content:
+          "운영 환경에서 실제로 필요한 정보를 빠르게 찾을 수 있도록 로그 추이, 에러 TOP10, 시간·요일 히트맵, 서비스별 트래픽, TraceId 딥링크, CSV 다운로드 등을 중심으로 대시보드를 구성했습니다. 실제 모니터링·문제 분석 흐름을 고려하여 UI 구조를 설계했습니다.",
+      },
+      {
+        title: "고성능 UI 최적화",
+        content:
+          "대량 로그 데이터 기반 시스템의 특성을 고려해 무한 스크롤, React Query 캐싱·리패치 전략, D3 렌더링 최적화, 번들 스플리팅(Vite 기반)을 적용하여 전체 서비스가 부드럽게 동작하도록 최적화했습니다.",
+      },
     ],
   },
   "project-saviing": {
