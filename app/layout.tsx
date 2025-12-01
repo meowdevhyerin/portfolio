@@ -18,9 +18,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Hyerin Hong - Portfolio',
     description: 'Frontend Developer Portfolio',
+    url: 'https://devhyerin.me',
     images: [
       {
-        url: '/images/thumbnail.png',
+        url: 'https://devhyerin.me/images/thumbnail.png',
         width: 1200,
         height: 630,
         alt: 'Hyerin Hong Portfolio',
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Hyerin Hong - Portfolio',
     description: 'Frontend Developer Portfolio',
-    images: ['/images/thumbnail.png'],
+    images: ['https://devhyerin.me/images/thumbnail.png'],
   },
 }
 
