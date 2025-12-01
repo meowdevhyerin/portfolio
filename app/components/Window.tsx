@@ -73,6 +73,16 @@ export default function Window({ id, title, zIndex, isActive, onFocus, onClose, 
       const imageIndex = parseInt(parts[3])
 
       const imageData = {
+        'project-loglens': [
+          { src: "/images/LogLens/아키텍처overview.png", caption: "시스템 아키텍처 구조도" },
+          { src: "/images/LogLens/대시보드.gif", caption: "실시간 로그 모니터링 대시보드" },
+          { src: "/images/LogLens/요청흐름그래프.gif", caption: "D3.js 기반 트랜잭션 흐름 시각화" },
+          { src: "/images/LogLens/의존성그래프.png", caption: "ReactFlow 기반 서비스 의존성 그래프" },
+          { src: "/images/LogLens/로그내역1.gif", caption: "SSE 기반 실시간 로그 스트리밍" },
+          { src: "/images/LogLens/AI분석보고서.gif", caption: "AI 로그 분석 & PDF 리포트 생성" },
+          { src: "/images/LogLens/AI챗봇.gif", caption: "스트리밍 LLM 기반 로그 분석 챗봇" },
+          { src: "/images/LogLens/사용자가이드.gif", caption: "사용자 가이드 및 인터페이스" },
+        ],
         'project-saviing': [
           { src: "/images/saviing/가챠뽑기.gif", caption: "가챠 시스템을 통한 아이템 획득" },
           { src: "/images/saviing/계좌이체내역왁인.gif", caption: "실시간 계좌 이체 내역 확인" },

@@ -17,6 +17,12 @@ const gifDurations: { [key: string]: number } = {
   "/images/saviing/상점.gif": 9000,
   "/images/saviing/적금주기변경.gif": 9000,
   "/images/saviing/펫클릭.gif": 10000,
+  "/images/LogLens/AI분석보고서.gif": 17600,
+  "/images/LogLens/AI챗봇.gif": 26400,
+  "/images/LogLens/대시보드.gif": 7520,
+  "/images/LogLens/로그내역1.gif": 14720,
+  "/images/LogLens/사용자가이드.gif": 21280,
+  "/images/LogLens/요청흐름그래프.gif": 29920,
 };
 
 export default function ImageViewerContent({
