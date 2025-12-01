@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   icons: {
     icon: '/images/favicon.ico',
   },
+  metadataBase: new URL('https://devhyerin.me'),
   openGraph: {
     title: 'Hyerin Hong - Portfolio',
     description: 'Frontend Developer Portfolio',
@@ -26,6 +27,8 @@ export const metadata: Metadata = {
       },
     ],
     type: 'website',
+    locale: 'ko_KR',
+    siteName: 'Hyerin Hong Portfolio',
   },
   twitter: {
     card: 'summary_large_image',
