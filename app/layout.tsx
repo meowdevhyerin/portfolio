@@ -11,6 +11,25 @@ const notoSansKR = Noto_Sans_KR({
 export const metadata: Metadata = {
   title: 'Hyerin Hong - Portfolio',
   description: 'Frontend Developer Portfolio',
+  openGraph: {
+    title: 'Hyerin Hong - Portfolio',
+    description: 'Frontend Developer Portfolio',
+    images: [
+      {
+        url: '/images/thumbnail.png',
+        width: 1200,
+        height: 630,
+        alt: 'Hyerin Hong Portfolio',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Hyerin Hong - Portfolio',
+    description: 'Frontend Developer Portfolio',
+    images: ['/images/thumbnail.png'],
+  },
 }
 
 export default function RootLayout({
